@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${cheeses} and ${cheeses.size()}">no cheeses yet. too bad.</p>
+
+<form method="post">
+    <label id="cheeseDelete" >
+        <h4>Select your Cheese to Remove</h4>
+        <select name="cheeseDelete">
+            <option th:each="cheese : ${cheeses}" th:value="${cheese.key}" th:text="${cheese.key}">Cheese Name</option>
+        </select>
+    </label>
+
+    <input type="submit" value="Remove a cheese" />
+</form>
+</body>
+</html>

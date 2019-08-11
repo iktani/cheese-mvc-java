@@ -8,8 +8,10 @@
     <nav th:replace="fragments :: navigation"></nav>
 
     <form method="post">
-        <input type="text" name="cheeseName" />
+        <input type="text" placeholder="cheese name" name="cheeseName" />
+        <input type="text" placeholder="cheese description" name="cheeseDescription" />
         <input type="submit" value="Add Cheese" />
+        <p class="error" th:text="${error}">Error Message</p>
 
     </form>
 
