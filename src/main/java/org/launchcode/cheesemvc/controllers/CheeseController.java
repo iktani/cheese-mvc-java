@@ -6,10 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 @Controller
 @RequestMapping(value="cheese")
 public class CheeseController {
