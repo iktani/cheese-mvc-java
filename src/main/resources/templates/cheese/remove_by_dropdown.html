@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container body-content">
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
@@ -9,10 +9,11 @@
 <p th:unless="${cheeses} and ${cheeses.size()}">no cheeses yet. too bad.</p>
 
 <form method="post">
-    <label id="cheeseDelete" >
+    <div class="form-group"></div>
+    <label for="cheeseDelete" >
         <h4>Select your Cheese to Remove</h4>
-        <select name="cheeseDelete">
-            <option th:each="cheese : ${cheeses}" th:value="${cheese.key}" th:text="${cheese.key}">Cheese Name</option>
+        <select class="form-control" name="cheeseDelete" id="cheeseDelete">
+            <option th:each="cheese : ${cheeses}"  th:value="${cheese.cheeseId}" th:text="${cheese.name}">Cheese Name</option>
         </select>
     </label>
 
