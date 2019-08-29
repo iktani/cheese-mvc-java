@@ -5,10 +5,13 @@ import org.launchcode.cheesemvc.models.User;
 import org.launchcode.cheesemvc.models.UserData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value="user")
@@ -52,32 +55,30 @@ public class UserController {
     @RequestMapping(value="add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("title", "Add a New User");
+        model.addAttribute(new User());
         return "user/add";
     }
 
     @RequestMapping(value="add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute User user, String verify) {
+    public String add(Model model, @ModelAttribute @Valid User user, Errors errors, String verify) {
 
-        if (isItValidLength(user.getUsername()) && isValidFormat(user.getUsername()) && !user.getEmail().isEmpty() && user.getPassword().equals(verify)) {
-            UserData.add(user);
-            return "redirect:";
+        if (errors.hasErrors() || user.getPassword() == null || verify == null || !user.getPassword().equals(verify)) {
+            if (user.getPassword() == null || verify == null || !user.getPassword().equals(verify)) {
+                user.setPassword("");
+                model.addAttribute("error", "Passwords do not match!");
+            }
+            if (errors.hasErrors()) {
+                model.addAttribute("user", user);
+            }
+
+            model.addAttribute("title", "Add a New User");
+            return "user/add";
         }
 
-        if (!user.getPassword().equals(verify)) {
-            model.addAttribute("error", "Passwords do not match!");
-        }
+        UserData.add(user);
+        return "redirect:";
 
-        if (!isItValidLength(user.getUsername()) || !isValidFormat(user.getUsername()) ) {
-            model.addAttribute("errorUser", "Username is blank or not between 5 and 15 characters");
-        }
 
-        if (user.getEmail().isEmpty()) {
-            model.addAttribute("errorEmail", "Email cannot be blank");
-        }
-
-        model.addAttribute("title", "Add a New User");
-        model.addAttribute("user", user);
-        return "user/add";
 
 
     }

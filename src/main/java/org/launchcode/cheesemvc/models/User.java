@@ -1,12 +1,23 @@
 package org.launchcode.cheesemvc.models;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
 public class User {
+
+    @NotNull
+    @Size(min=5, max=15, message = "Username must be between 5 and 15")
     private String username;
+
+    @Email
     private String email;
+
+    @NotNull
+    @Size(min=6, message = "Password must be at least 6 characters")
     private String password;
     private int userId;
     private LocalDate joinDate = LocalDate.now();
