@@ -60,17 +60,10 @@ public class UserController {
     }
 
     @RequestMapping(value="add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid User user, Errors errors, String verify) {
+    public String add(Model model, @ModelAttribute @Valid User user, Errors errors) {
 
-        if (errors.hasErrors() || user.getPassword() == null || verify == null || !user.getPassword().equals(verify)) {
-            if (user.getPassword() == null || verify == null || !user.getPassword().equals(verify)) {
-                user.setPassword("");
-                model.addAttribute("error", "Passwords do not match!");
-            }
-            if (errors.hasErrors()) {
-                model.addAttribute("user", user);
-            }
-
+        if (errors.hasErrors()) {
+            model.addAttribute("user", user);
             model.addAttribute("title", "Add a New User");
             return "user/add";
         }

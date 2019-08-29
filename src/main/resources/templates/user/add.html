@@ -24,9 +24,9 @@
             <span class="text-danger" th:errors="*{password}"></span>
         </div>
         <div class="form-group">
-            <label for="verify-password-field">Verify Password</label>
-            <input class="form-control" type="password" id="verify-password-field" name="verify">
-            <span th:if="${error} != null" class="text-danger" th:text="${error}"></span>
+            <label th:for="verifyPassword">Verify Password</label>
+            <input class="form-control" type="password" th:field="*{verifyPassword}">
+            <span class="text-danger" th:errors="*{verifyPassword}"></span>
         </div>
         <input type="submit" value="Submit" />
 
