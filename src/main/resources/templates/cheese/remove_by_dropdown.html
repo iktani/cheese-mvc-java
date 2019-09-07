@@ -13,7 +13,7 @@
     <label for="cheeseDelete" >
         <h4>Select your Cheese to Remove</h4>
         <select class="form-control" name="cheeseDelete" id="cheeseDelete">
-            <option th:each="cheese : ${cheeses}"  th:value="${cheese.cheeseId}" th:text="${cheese.name}">Cheese Name</option>
+            <option th:each="cheese : ${cheeses}"  th:value="${cheese.id}" th:text="${cheese.name}">Cheese Name</option>
         </select>
     </label>
 
